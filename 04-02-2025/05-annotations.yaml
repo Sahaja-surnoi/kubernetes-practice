@@ -1,0 +1,18 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+  namespace: sahashop
+  labels:
+    module: backend
+    environment: web
+    managed: sahaja
+  annotations:
+    description: "Den of Kubernetes"
+    maintainer: "sahaja"
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    ports:
+    - containerPort: 80

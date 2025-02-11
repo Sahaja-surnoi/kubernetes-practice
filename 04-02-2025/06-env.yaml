@@ -1,0 +1,23 @@
+kind: Pod
+apiVersion: v1
+metadata:
+  name: nginx
+  namespace: sahashop
+  labels:
+    module: backend
+    environment: web
+    managed: sahaja
+  annotations:
+    description: "Den of Kubernetes"
+    maintainer: "sahaja"
+spec:
+  containers:
+  - name: nginx
+    image: nginx
+    env:
+      - name: course
+        value: kubernetes
+      - name: trainer
+        value: "sahaja"
+      - name: duration
+        value: "120Hrs"
