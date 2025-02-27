@@ -35,12 +35,10 @@ spec:
         resources:
           requests:
             cpu: 100m
-            memory: 128mi
-          #limits should be greater than or equal to requests
+            memory: 128Mi
           limits:
             cpu: 100m
-            memory: 128mi
-  
+            memory: 128Mi
         envFrom:
         - configMapRef:
             name: backend
@@ -60,3 +58,17 @@ spec:
     protocol: TCP
     port: 8080 # service port
     targetPort: 8080 # container port
+---
+apiVersion: autoscaling/v1
+kind: HorizontalPodAutoscaler
+metadata:
+ name: backend
+ namespace: expense
+spec:
+ scaleTargetRef:
+   apiVersion: apps/v1
+   kind: Deployment
+   name: backend
+ minReplicas: 1
+ maxReplicas: 10
+ targetCPUUtilizationPercentage: 15 # usually 75 in real environment
